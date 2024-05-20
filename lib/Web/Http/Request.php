@@ -15,4 +15,9 @@ class Request
     {
         return file_get_contents('php://input');
     }
+
+    public static function getQueries(string $queryName): mixed
+    {
+        return $_GET[$queryName];
+    }
 }

@@ -24,8 +24,28 @@ class Response
 
     public function json(array $bodyResponse): string
     {
+        $response = [
+            "status" => self::$code,
+            "timestamp" => date("Ymd-H:i:s"),
+            "data" => $bodyResponse,
+        ];
+        return $this->parserToJson($response);
+    }
+
+    public function errorJson(string|array $messageError): string
+    {
+        $responseError = [
+            "status" => self::$code,
+            "timestamp" => date("Ymd-H:i:s"),
+            "error" => $messageError,
+        ];
+        return $this->parserToJson($responseError);
+    }
+
+    private function parserToJson(array $response): string
+    {
         header("Content-Type: application/json");
         http_response_code(self::$code);
-        return json_encode($bodyResponse);
+        return json_encode($response);
     }
 }

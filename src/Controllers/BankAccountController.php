@@ -16,18 +16,18 @@ class BankAccountController
 
     public function create(string $request): string
     {
-        $body = json_decode($request, true);
-        $result = $this->userService->register($body);
-        $bodyResponse = [
-            'message' => $result[1],
-            'status' => Code::CREATED->value
-        ];
-        if(!$result[0]){
-            $bodyResponse['error'] = $bodyResponse['message'];
-            unset($bodyResponse['message']);
-            return Response::status(Code::BAD_REQUEST)->json($bodyResponse);
-        }
-        return Response::status(Code::CREATED)->json($bodyResponse);
+//        $body = json_decode($request, true);
+//        $result = $this->userService->register($body);
+//        $bodyResponse = [
+//            'message' => $result[1],
+//            'status' => Code::CREATED->value
+//        ];
+//        if(!$result[0]){
+//            $bodyResponse['error'] = $bodyResponse['message'];
+//            unset($bodyResponse['message']);
+//            return Response::status(Code::BAD_REQUEST)->json($bodyResponse);
+//        }
+        return Response::status(Code::CREATED)->json(["message" => "test"]);
     }
 
 }

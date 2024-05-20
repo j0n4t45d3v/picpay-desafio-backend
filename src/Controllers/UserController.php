@@ -2,6 +2,7 @@
 
 namespace Desafio\Picpay\Controllers;
 
+use Desafio\Picpay\Lib\Web\Http\Request;
 use Desafio\Picpay\Lib\Web\Http\Response;
 use Desafio\Picpay\Lib\Web\Http\Status\Code;
 use Desafio\Picpay\Service\UserService;
@@ -33,6 +34,16 @@ class UserController
     public function findAllUsers(string $request): string
     {
         $users = $this->userService->findAllUsers();
+        return Response::status(Code::OK)->json($users);
+    }
+
+    public function findOneUser(string $request): string
+    {
+        $id = Request::getQueries("id");
+        $users = $this->userService->findOneUser($id);
+        if(!$users) {
+            return Response::status(Code::BAD_REQUEST)->json(['message' => "Error In Find User"]);
+        }
         return Response::status(Code::OK)->json($users);
     }
 

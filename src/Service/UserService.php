@@ -25,4 +25,9 @@ class UserService
     {
         return $this->repository->findAll();
     }
+
+    public function findOneUser($requestId): array|false
+    {
+        return $this->repository->findOne($requestId);
+    }
 }

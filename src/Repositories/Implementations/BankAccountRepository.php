@@ -18,7 +18,7 @@ class BankAccountRepository implements CrudRepository
         return [];
     }
 
-    function findOne(): array
+    function findOne($id): array|bool
     {
         // TODO: Implement findOne() method.
         return [];

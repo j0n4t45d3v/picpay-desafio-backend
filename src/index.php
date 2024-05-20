@@ -18,6 +18,7 @@ $router = new Router("/api");
 
 $router->get("v1", [$indexController, 'index']);
 $router->get("v1/users", [$userController, 'findAllUsers']);
+$router->get("v1/users/id", [$userController, 'findOneUser']);
 $router->post("v1/users/register", [$userController, 'register']);
 
 $router->runRoutes();

@@ -11,7 +11,7 @@ class UserRepository implements CrudRepository
 
     function save($entity): array
     {
-        $sql = "INSERT INTO users (full_name, cpf, email, passw, type) VALUES 
+        $sql = "INSERT INTO users (full_name, cpf, email, passw, type_user) VALUES
                 (:fullName, :cpf, :email, :password, :typeUser)";
         if(!$entity instanceof User) {
             return [false, "Error Class Is Not User Class"];
@@ -23,7 +23,8 @@ class UserRepository implements CrudRepository
         $stmt->bindValue(":cpf", $entity->getCpf());
         $stmt->bindValue(":email", $entity->getEmail());
         $stmt->bindValue(":password", $entity->getPassword());
-        $stmt->bindValue(":type", $entity->getTypeUser());
+        $stmt->bindValue(":typeUser", $entity->getTypeUser());
+
         $rs = $stmt->execute();
 
         if(!$rs) return [false, 'Error In Save User'];
@@ -40,10 +41,14 @@ class UserRepository implements CrudRepository
         return $stmt->fetchAll();
     }
 
-    function findOne(): array
+    function findOne($id): array|bool
     {
-        // TODO: Implement findOne() method.
-        return [];
+        $sql = "SELECT * FROM users u WHERE u.cpf = :cpf";
+        $con = Connection::getInstance()->getPdoConnection();
+        $stmt = $con->prepare($sql);
+        $stmt->bindValue(":cpf", $id);
+        $stmt->execute();
+        return $stmt->fetch();
     }
 
     function delete($id): array
