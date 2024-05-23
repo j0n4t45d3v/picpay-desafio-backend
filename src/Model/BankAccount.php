@@ -6,23 +6,18 @@ use Desafio\Picpay\Model\Interface\BaseModel;
 
 class BankAccount implements BaseModel
 {
-    private string $accountNumber;
-    private string $userCpf;
-    private float $balance;
+    private ?string $accountNumber;
+    private ?string $userCpf;
+    private ?float $balance;
 
-    /**
-     * @param string $accountNumber
-     * @param string $userCpf
-     * @param float $balance
-     */
-    public function __construct(string $accountNumber, string $userCpf, float $balance)
+    public function __construct(?string $accountNumber, ?string $userCpf, ?float $balance)
     {
-        $this->accountNumber = $accountNumber;
+        $this->accountNumber = $accountNumber ?? null;
         $this->userCpf = $userCpf;
         $this->balance = $balance;
     }
 
-    public function getAccountNumber(): string
+    public function getAccountNumber(): ?string
     {
         return $this->accountNumber;
     }
@@ -32,7 +27,7 @@ class BankAccount implements BaseModel
         $this->accountNumber = $accountNumber;
     }
 
-    public function getUserCpf(): string
+    public function getUserCpf(): ?string
     {
         return $this->userCpf;
     }
@@ -42,7 +37,7 @@ class BankAccount implements BaseModel
         $this->userCpf = $userCpf;
     }
 
-    public function getBalance(): float
+    public function getBalance(): ?float
     {
         return $this->balance;
     }

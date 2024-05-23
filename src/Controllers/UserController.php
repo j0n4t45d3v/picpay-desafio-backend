@@ -39,7 +39,7 @@ class UserController
 
     public function findOneUser(string $request): string
     {
-        $id = Request::getQueries("id");
+        $id = Request::getParam("id");
         $users = $this->userService->findOneUser($id);
         if(!$users) {
             return Response::status(Code::BAD_REQUEST)->json(['message' => "Error In Find User"]);

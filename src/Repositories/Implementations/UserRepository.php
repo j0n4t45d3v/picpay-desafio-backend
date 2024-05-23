@@ -47,8 +47,11 @@ class UserRepository implements CrudRepository
         $con = Connection::getInstance()->getPdoConnection();
         $stmt = $con->prepare($sql);
         $stmt->bindValue(":cpf", $id);
-        $stmt->execute();
-        return $stmt->fetch();
+
+        $status = $stmt->execute();
+
+        if(!$status) return [false, $stmt->errorInfo()];
+        return $stmt->fetchObject();
     }
 
     function delete($id): array

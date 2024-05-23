@@ -10,8 +10,13 @@ trait UserControllerFactory
 {
     public function createUserController(): UserController
     {
-        $userRepository = new UserRepository;
-        $userService = new UserService($userRepository);
+        $userService = $this->createUserService();
         return new UserController($userService);
+    }
+
+    public function createUserService(): UserService
+    {
+        $userRepository = new UserRepository;
+        return new UserService($userRepository);
     }
 }
