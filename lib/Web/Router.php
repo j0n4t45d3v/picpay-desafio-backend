@@ -78,7 +78,7 @@ class Router
         $requestUri = $_GET["url"] ?? $_SERVER["REQUEST_URI"];
         $requestUri = explode("?", $requestUri)[0];
 
-        $removePrefixApache && $requestUri = str_replace("/api", '', $requestUri);
+//        $removePrefixApache && $requestUri = str_replace("/api", '', $requestUri);
 
         $methodNotAllowed = true;
         $routeNotFound = true;

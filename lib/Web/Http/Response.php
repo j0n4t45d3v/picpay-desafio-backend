@@ -22,7 +22,7 @@ class Response
         return new static($statusCode);
     }
 
-    public function json(array $bodyResponse): string
+    public function json(array|string $bodyResponse): string
     {
         $response = [
             "status" => self::$code,

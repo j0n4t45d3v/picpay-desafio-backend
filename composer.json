@@ -13,9 +13,11 @@
         ]
     },
     "require": {
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "ext-fileinfo": "*"
     },
     "scripts": {
-        "start-server": ["php -S localhost:8000 ./src/index.php"]
+        "start-server": ["php -S localhost:8000 ./src/index.php"],
+        "migrate": ["./migrate"]
     }
 }
