@@ -5,25 +5,25 @@ namespace Desafio\Picpay\Model;
 class Transference
 {
     private int $id;
-    private string $userCpfIssurer;
+    private string $userCpfIssuer;
     private string $userCpfDestiny;
     private float $valueTransaction;
 
-    public function __construct(string $userCpfIssurer, string $userCpfDestiny, $valueTransaction)
+    public function __construct(string $userCpfIssuer, string $userCpfDestiny, $valueTransaction)
     {
-        $this->userCpfIssurer = $userCpfIssurer;
+        $this->userCpfIssuer = $userCpfIssuer;
         $this->userCpfDestiny = $userCpfDestiny;
         $this->valueTransaction = $valueTransaction;
     }
 
-    public function getUserCpfIssurer(): string
+    public function getUserCpfIssuer(): string
     {
-        return $this->userCpfIssurer;
+        return $this->userCpfIssuer;
     }
 
-    public function setUserCpfIssurer(string $userCpfIssurer): void
+    public function setUserCpfIssuer(string $userCpfIssuer): void
     {
-        $this->userCpfIssurer = $userCpfIssurer;
+        $this->userCpfIssuer = $userCpfIssuer;
     }
 
     public function getUserCpfDestiny(): string
@@ -49,7 +49,7 @@ class Transference
     public static function serializer(array $bodyJson): static
     {
         extract($bodyJson);
-        return new static($user_issurer, $user_destiny, $value_transaction);
+        return new static($user_issuer, $user_destiny, $value_transaction);
     }
 
 }

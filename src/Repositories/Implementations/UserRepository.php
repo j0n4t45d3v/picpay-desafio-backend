@@ -51,7 +51,7 @@ class UserRepository implements CrudRepository
         $status = $stmt->execute();
 
         if(!$status) return [false, $stmt->errorInfo()];
-        return $stmt->fetchObject();
+        return [true, $stmt->fetchObject()];
     }
 
     function delete($id): array

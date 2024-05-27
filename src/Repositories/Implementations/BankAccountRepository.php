@@ -51,7 +51,7 @@ class BankAccountRepository implements CrudRepository
         $stmt = $con->prepare($sql);
         $stmt->bindValue(":user_cpf", $cpfUser);
         $stmt->execute();
-        return [true, $stmt->fetchAll()];
+        return [true, $stmt->fetchObject()];
     }
 
     function delete($id): array

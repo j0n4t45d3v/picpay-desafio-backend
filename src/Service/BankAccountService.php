@@ -21,14 +21,15 @@ class BankAccountService
     public function create($requestBody): array
     {
         $account = BankAccount::serializer($requestBody);
-        $userAlreadyExists = $this->userService->findOneUser($account->getUserCpf());
+        list($success, $userAlreadyExists) = $this->userService->findOneUser($account->getUserCpf());
+
         if($this->repository instanceof BankAccountRepository) {
-            $accountAlreadyExists = $this->repository->findAccountByCpfUser($account->getUserCpf());
+            list($status, $accountAlreadyExists) = $this->repository->findAccountByCpfUser($account->getUserCpf());
             if ($accountAlreadyExists) {
                 return [false, "Already exist account for user", 'status' => 400];
             }
         }
-        if(!$userAlreadyExists)
+        if(!$success)
             return [false, "User not found", 'status' => 404];
         return $this->repository->save($account);
     }

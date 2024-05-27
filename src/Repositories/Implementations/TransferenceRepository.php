@@ -13,11 +13,11 @@ class TransferenceRepository implements CrudRepository
     {
         if(!$entity instanceof Transference) return [false, 'Request body is not entity Transference'];
 
-        $sql = "INSERT INTO transference (user_issurer, user_destiny, value_transaction)
-                VALUES (:user_issurer, :user_destiny, :value_transaction)";
+        $sql = "INSERT INTO transference (user_issuer, user_destiny, value_transaction)
+                VALUES (:user_issuer, :user_destiny, :value_transaction)";
         $con = Connection::getInstance()->getPdoConnection();
         $stmt = $con->prepare($sql);
-        $stmt->bindValue(":user_issurer", $entity->getUserCpfIssurer());
+        $stmt->bindValue(":user_issuer", $entity->getUserCpfIssuer());
         $stmt->bindValue(":user_destiny", $entity->getUserCpfDestiny());
         $stmt->bindValue(":value_transaction", $entity->getValueTransaction());
         $status = $stmt->execute();

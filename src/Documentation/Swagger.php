@@ -7,7 +7,7 @@ use Desafio\Picpay\Lib\Web\Router;
 
 class Swagger
 {
-    public function createDocumentationSwagger(Router &$router): void
+    public function createDocumentationSwagger(Router $router): void
     {
         $router->get("v1/api-doc.yml", [$this,'swaggerYaml']);
         $router->get("v1/swagger-ui.css", [$this,'uiSwagger']);

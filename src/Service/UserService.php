@@ -26,7 +26,7 @@ class UserService
         return $this->repository->findAll();
     }
 
-    public function findOneUser($requestId): array|false
+    public function findOneUser($requestId): array
     {
         return $this->repository->findOne($requestId);
     }
