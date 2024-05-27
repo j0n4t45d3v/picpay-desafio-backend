@@ -1,0 +1,199 @@
+openapi: 3.0.0
+
+info:
+  title: Simple api pic-pay
+  description: Simplified api pic-pay from the pic-pay challenge
+  version: 1.0.0-BETA
+externalDocs:
+  url: https://github.com/PicPay/picpay-desafio-backend
+  description: Challenge Repository
+servers:
+  - url: http://localhost:8000/api
+    description: Development api server
+paths:
+  /v1:
+    get:
+      summary: Api path index
+      tags:
+        - Home
+      responses:
+        200:
+          description: Api version and describe
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Response"
+                  - type: object
+                  - properties:
+                      data:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            example: api name
+                          description:
+                            type: string
+                            example: api describe
+                          version:
+                            type: string
+                            example: 1.0.0
+  /v1/users:
+    get:
+      tags:
+        - User
+      summary: Get all user
+      responses:
+        200:
+          description: Success response users
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Response'
+                  - type: object
+                  - properties:
+                      data:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/User'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+  /v1/users/id:
+    get:
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: string
+          required: true
+          description: Cpf user
+          example: 12345678901
+      tags:
+        - User
+      summary: Get user by cpf
+      responses:
+        200:
+          description: Success response users
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/Response'
+                  - type: object
+                  - properties:
+                      data:
+                        $ref: '#/components/schemas/User'
+        400:
+          description: Error in find user
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Response"
+                  - type: object
+                    properties:
+                      error:
+                        type: string
+                        example: Error in find user
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+  /v1/users/register:
+    post:
+      tags:
+        - User
+      summary: Register new user
+      responses:
+        201:
+          description: Success in register new user
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Response"
+                  - type: object
+                  - properties:
+                      data:
+                        type: string
+                        example: "User Saved"
+        400:
+          description: Error in register user
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Response"
+                  - type: object
+                  - properties:
+                      data:
+                        type: string
+                        example: Error In Save User
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+  /v1/accounts:
+    get:
+      tags:
+        - Account-Bank
+      summary: Get accounts banks
+      responses:
+        200:
+          description: Account bank created
+
+
+components:
+  schemas:
+    Response:
+      description: Model response
+      type: object
+      properties:
+        status:
+          type: integer
+          example: 200
+        timestamp:
+          type: string
+          format: date-time
+          example: '20240523-10:47:49'
+    ServerError:
+      allOf:
+        - $ref: "#/components/schemas/Response"
+        - type: object
+          properties:
+            error:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: Internal Server Error
+                stacktrace:
+                  type: string
+                  example: PDOException Error in SQL
+    User:
+      type: object
+      properties:
+        full_name:
+          type: string
+          example: John Doe
+        email:
+          type: string
+          example: John@Doe.com
+        password:
+          type: string
+          example: johndoe123
+        cpf:
+          type: string
+          example: 12345678901
+        type_user:
+          type: string
+          enum: [ "COMMON", "LOJISTA" ]

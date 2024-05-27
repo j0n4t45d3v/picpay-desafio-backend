@@ -1,0 +1,23 @@
+{
+    "name": "desafio/picpay",
+    "description": "desafio de backend do picpay",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Desafio\\Picpay\\": "src/",
+            "Desafio\\Picpay\\Lib\\": "lib/"
+        },
+        "files": [
+            "config.php"
+        ]
+    },
+    "require": {
+        "ext-pdo": "*",
+        "ext-fileinfo": "*"
+    },
+    "scripts": {
+        "start-server": ["php -S localhost:8000 ./src/index.php"],
+        "migrate": ["./migrate"]
+    }
+}
